@@ -5,6 +5,7 @@ Data Cruncher
 '''
 import pandas as pd
 import numpy as np
+from collections import Counter
 
 def giveTimeStamp():
     import time, datetime
@@ -13,14 +14,21 @@ def giveTimeStamp():
     return strToret
 
 def getLangStat(df_p):
-    all_langs = np.unique(df_p['lang'].to_list())
-    print all_langs
+    all_langs = np.unique(df_p['lang'].tolist())
+    # print all_langs
+    for lang_ in all_langs:
+        lang_df_status = df_p[df_p['lang']==lang_]['status'].tolist()
+        status_dict = Counter(lang_df_status)
+        print 'Language:', lang_
+        print status_dict
+        print '-'*100
 
 def getDF(file_to_an):
     df_ = pd.read_csv(file_to_an)
     df_.columns = ['hash', 'dura', 'type', 'status', 'timestamp', 'noidea1', 'size', 'noidea1', 'noidea3', 'lang']
     # print df_.tail()
     print df_.shape
+    return df_
 
 if __name__=='__main__':
    # file_path = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/csc712_test_data/sample_test_suite.csv'
