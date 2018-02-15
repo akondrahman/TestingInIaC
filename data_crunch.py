@@ -4,12 +4,17 @@ Feb 15, 2018
 Data Cruncher
 '''
 import pandas as pd
+import numpy as np
 
 def giveTimeStamp():
     import time, datetime
     tsObj = time.time()
     strToret = datetime.datetime.fromtimestamp(tsObj).strftime('%Y-%m-%d %H:%M:%S')
     return strToret
+
+def getLangStat(df_p):
+    all_langs = np.unique(df_p['lang'].to_list())
+    print all_langs 
 
 def getDF(file_to_an):
     df_ = pd.read_csv(file_to_an)
@@ -23,6 +28,7 @@ if __name__=='__main__':
    print 'Started at:', giveTimeStamp()
    print '-'*100
    df2ana = getDF(file_path)
+   getLangStat(df2df2ana)
    print '-'*100
    print 'Ended at:', giveTimeStamp()
    print '-'*100
