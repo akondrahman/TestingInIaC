@@ -14,12 +14,12 @@ def giveTimeStamp():
 
 def getLangStat(df_p):
     all_langs = np.unique(df_p['lang'].to_list())
-    print all_langs 
+    print all_langs
 
 def getDF(file_to_an):
     df_ = pd.read_csv(file_to_an)
     df_.columns = ['hash', 'dura', 'type', 'status', 'timestamp', 'noidea1', 'size', 'noidea1', 'noidea3', 'lang']
-    print df_.tail()
+    # print df_.tail()
     print df_.shape
 
 if __name__=='__main__':
@@ -28,7 +28,7 @@ if __name__=='__main__':
    print 'Started at:', giveTimeStamp()
    print '-'*100
    df2ana = getDF(file_path)
-   getLangStat(df2df2ana)
+   getLangStat(df2ana)
    print '-'*100
    print 'Ended at:', giveTimeStamp()
    print '-'*100
