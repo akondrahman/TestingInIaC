@@ -44,9 +44,9 @@ if __name__=='__main__':
    else:
       df2ana = pickle.load( open( file_path, "rb" ) )
    print '-'*100
-   print df_.tail()
+   print df2ana.tail()
    print '-'*100
-   print 'Dataset size:', df_.shape
+   print 'Dataset size:', df2ana.shape
    print '-'*100
    getLangStat(df2ana)
    print '-'*100
