@@ -28,7 +28,6 @@ def getLangStat(df_p):
 def getDF(file_to_an):
     df_ = pd.read_csv(file_to_an)
     df_.columns = ['hash', 'dura', 'type', 'status', 'timestamp', 'noidea1', 'size', 'noidea1', 'noidea3', 'lang']
-    # print df_.tail()
     return df_
 
 if __name__=='__main__':
@@ -44,6 +43,8 @@ if __name__=='__main__':
       df2ana.to_pickle('/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/csc712_test_data/FULL_TEST_DATA.PKL')
    else:
       df2ana = pickle.load( open( file_path, "rb" ) )
+   print '-'*100
+   print df_.tail()
    print '-'*100
    print 'Dataset size:', df_.shape
    print '-'*100
