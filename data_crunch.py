@@ -15,19 +15,20 @@ def giveTimeStamp():
 
 def getLangStat(df_p):
     all_langs = np.unique(df_p['lang'].tolist())
-    # print all_langs
+    print 'Languages:', all_langs
+    print '-'*100
     for lang_ in all_langs:
         lang_df_status = df_p[df_p['lang']==lang_]['status'].tolist()
         status_dict = Counter(lang_df_status)
         print 'Language:', lang_
         print status_dict
-        print '-'*100
+        print '-'*50
 
 def getDF(file_to_an):
     df_ = pd.read_csv(file_to_an)
     df_.columns = ['hash', 'dura', 'type', 'status', 'timestamp', 'noidea1', 'size', 'noidea1', 'noidea3', 'lang']
     # print df_.tail()
-    print df_.shape
+    print 'Dataset size:', df_.shape
     return df_
 
 if __name__=='__main__':
@@ -36,6 +37,7 @@ if __name__=='__main__':
    print 'Started at:', giveTimeStamp()
    print '-'*100
    df2ana = getDF(file_path)
+   df2ana.to_pickle('/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/csc712_test_data/FULL_TEST_DATA.PKL')
    getLangStat(df2ana)
    print '-'*100
    print 'Ended at:', giveTimeStamp()
