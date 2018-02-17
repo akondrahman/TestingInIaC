@@ -19,7 +19,7 @@ def getLangStat(df_p):
     print 'Languages:', all_langs
     print '-'*100
     for lang_ in all_langs:
-        lang_df_status = df_p[df_p['lang']==lang_]['status'].tolist()
+        lang_df_status = df_p[df_p['lang']==lang_]['stag'].tolist()
         status_dict = Counter(lang_df_status)
         print 'Language:', lang_
         print status_dict
@@ -27,7 +27,7 @@ def getLangStat(df_p):
 
 def getDF(file_to_an):
     df_ = pd.read_csv(file_to_an)
-    df_.columns = ['hash', 'dura', 'type', 'status', 'timestamp', 'noidea1', 'size', 'noidea1', 'noidea3', 'lang']
+    df_.columns = ['test_suit', 'chng_requ', 'stag', 'stat', 'laun_time', 'exec_time', 'size', 'shar_numb', 'run_num', 'lang']
     return df_
 
 if __name__=='__main__':
