@@ -19,7 +19,7 @@ def getLangStat(df_p):
     print 'Languages:', all_langs
     print '-'*100
     for lang_ in all_langs:
-        lang_df_status = df_p[df_p['lang']==lang_]['stag'].tolist()
+        lang_df_status = df_p[df_p['lang']==lang_]['stat'].tolist()
         status_dict = Counter(lang_df_status)
         print 'Language:', lang_
         print status_dict
@@ -32,15 +32,19 @@ def getDF(file_to_an):
 
 if __name__=='__main__':
    # file_path = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/csc712_test_data/sample_test_suite.csv'
+   ### full dataset
    # file_path = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/csc712_test_data/testSuiteDataset.csv'
+   ### pared daatset
+   # file_path = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/csc712_test_data/paredDatasetOptimized.csv'
 
+   ### full pickle file: by default use this 
    file_path = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/csc712_test_data/FULL_TEST_DATA.PKL'
 
    print 'Started at:', giveTimeStamp()
    print '-'*100
    if '.csv' in file_path:
       df2ana = getDF(file_path)
-      df2ana.to_pickle('/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/csc712_test_data/FULL_TEST_DATA.PKL')
+      # df2ana.to_pickle('/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/csc712_test_data/FULL_TEST_DATA.PKL')
    else:
       df2ana = pickle.load( open( file_path, "rb" ) )
    print '-'*100
