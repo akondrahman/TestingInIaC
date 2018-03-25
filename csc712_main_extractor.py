@@ -4,6 +4,9 @@ Mar 25, 2018
 Script to extract all code smells using Puppeteer
 '''
 import csc712_constants as constants
+import os
+import csc712_lint_engine as lint_engine
+
 
 def checkValidity(file_path):
     # skip files that are in hidden directories, and in spec folders
@@ -28,6 +31,7 @@ def getMonthData(file_p, dir_p):
     return month2ret
 
 def getData(dir_p):
+    counter = 0
     for root_, dirs, files_ in os.walk(dir_p):
        for file_ in files_:
            if (file_.endswith(constants.PP_EXT) or file_.endswith(constants.CH_EXT)):
@@ -36,8 +40,9 @@ def getData(dir_p):
                     counter += 1
                     print 'Analyzing:{},Index:{}'.format(full_p_file, counter)
                     month_str      = getMonthData(full_p_file, dir_p)
-                    # impl_smells    = lint_engine.getImplSmells(full_p_file)
+                    impl_smells    = lint_engine.getImplSmells(full_p_file)
                     orig_file_name = processFileName(full_p_file)
+                    print '*'*50
 
 ds_dir = '/Users/akond/SECU_REPOS/test-pupp/'
 if __name__=='__main__':
