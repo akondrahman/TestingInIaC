@@ -6,6 +6,13 @@ Script to extract all code smells using Puppeteer
 import csc712_constants as constants
 import os
 import csc712_lint_engine as lint_engine
+import time
+import datetime
+
+def giveTimeStamp():
+  tsObj = time.time()
+  strToret = datetime.datetime.fromtimestamp(tsObj).strftime('%Y-%m-%d %H:%M:%S')
+  return strToret
 
 
 def checkValidity(file_path):
@@ -40,10 +47,21 @@ def getData(dir_p):
                     counter += 1
                     print 'Analyzing:{},Index:{}'.format(full_p_file, counter)
                     month_str      = getMonthData(full_p_file, dir_p)
-                    impl_smells    = lint_engine.getImplSmells(full_p_file)
+                    impl_smells    = lint_engine.runLinter(full_p_file)
                     orig_file_name = processFileName(full_p_file)
                     print '*'*50
 
 ds_dir = '/Users/akond/SECU_REPOS/test-pupp/'
 if __name__=='__main__':
+    t1 = time.time()
+    print 'Started at:', giveTimeStamp()
+    print '*'*100
+
     getData(ds_dir)
+
+    print 'Ended at:', giveTimeStamp()
+    print '*'*100
+    t2 = time.time()
+    diff = (t2 - t1 ) / 60
+    print "Duration: {} minutes".format(diff)
+    print '*'*100
