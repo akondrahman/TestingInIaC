@@ -25,7 +25,7 @@ def runLinter(full_path_file):
     #1. get implementation smells
     getImplSmells(full_path_file)
     #2. get Design Smells
-    desi_smel_for_file = SmellDectector.getSmellsFromFile(path2file)
+    desi_smel_for_file = SmellDectector.getSmellsFromFile(full_path_file)
     # 3. parse output
     impl_smel_for_file = impl_aggr.getImplSmellCount()
     #4. delete temp file
