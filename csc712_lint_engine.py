@@ -21,17 +21,14 @@ def getImplSmells(path2file):
            print constants.EXCEPTION + str(e_)
 
 
-def getDesiSmells(path2file):
-
-
 def runLinter(full_path_file):
     #1. get implementation smells
     getImplSmells(full_path_file)
     #2. get Design Smells
-    getDesiSmells(full_path_file)
+    desi_smel_for_file = SmellDectector.getSmellsFromFile(path2file)
     # 3. parse output
-    impl_rul_cnt_out = impl_aggr.getImplSmellCount()
+    impl_smel_for_file = impl_aggr.getImplSmellCount()
     #4. delete temp file
     os.remove(constants.OUTPUT_TMP_LOG)
-    ## returns a tuple: first is count, second is line string
-    return impl_rul_cnt_out
+    ## returns a tuple of lists : first is implementation, second is line design
+    return (impl_smel_for_file, desi_smel_for_file)
