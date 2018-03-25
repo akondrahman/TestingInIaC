@@ -7,6 +7,9 @@ import os
 import numpy as np
 import csc712_constants as constants
 import impl_aggr
+## Puppeteer stuff
+from SmellDetector import SmellDectector
+
 
 def getImplSmells(path2file):
     if(path2file.endswith(constants.PP_EXT)):
@@ -18,12 +21,17 @@ def getImplSmells(path2file):
            print constants.EXCEPTION + str(e_)
 
 
+def getDesiSmells(path2file):
+
+
 def runLinter(full_path_file):
-    #1. run linter with custom rules
+    #1. get implementation smells
     getImplSmells(full_path_file)
-    # 2. parse output
+    #2. get Design Smells
+    getDesiSmells(full_path_file)
+    # 3. parse output
     impl_rul_cnt_out = impl_aggr.getImplSmellCount()
-    #3. delete temp file
-    # os.remove(constants.OUTPUT_TMP_LOG)
+    #4. delete temp file
+    os.remove(constants.OUTPUT_TMP_LOG)
     ## returns a tuple: first is count, second is line string
     return impl_rul_cnt_out

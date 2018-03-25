@@ -48,6 +48,7 @@ def getData(dir_p):
                     print 'Analyzing:{},Index:{}'.format(full_p_file, counter)
                     month_str      = getMonthData(full_p_file, dir_p)
                     impl_smells    = lint_engine.runLinter(full_p_file)
+                    print impl_smells
                     orig_file_name = processFileName(full_p_file)
                     print '*'*50
 
