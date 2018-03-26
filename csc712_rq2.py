@@ -4,6 +4,24 @@ Answer to RQ2 for CSC 712 project
 Mar 26, 2018
 '''
 
+def dumpContentIntoFile(strP, fileP):
+    fileToWrite = open( fileP, 'w')
+    fileToWrite.write(strP)
+    fileToWrite.close()
+    return str(os.stat(fileP).st_size)
+
+def makeCSV(lis_par, nam, dir):
+    str_ = ''
+    header = 'MONTH,TYPE,CNT_PER_FIL,SMELL_DENSITY,UNI_FIL_PER,'
+    for tup in lis_par:
+        for elem in tup:
+            str_ = str_ + str(elem) + ','
+        str_ = str_ + '\n'
+    str_ = header + '\n' + str_
+    file2save = dir + nam + '.csv'
+    os_bytes = dumpContentIntoFile(str_, file2save)
+    print 'DUMPED CSV FILE OF {} BYTES'.format(os_bytes)
+
 def perfAnal(df_pa, header_pa, output_dir, ds_name):
     createOutputDirectory(output_dir)
     mon_lis = np.unique(df_pa['MONTH'].tolist())
