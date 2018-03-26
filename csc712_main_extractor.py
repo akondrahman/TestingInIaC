@@ -103,11 +103,11 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
               counter += 1
               print 'Count:{}, file:{}'.format(counter, path_to_analyze)
               str_write = str_write + month_of_file + ',' + full_path_of_file + ',' + path_to_analyze + ','
-              all_sme_for_fil = lint_engine.runLinter(path_to_analyze)
+              all_sme_for_fil, all_sme_cnt = lint_engine.runLinter(path_to_analyze)
               for sme_ in all_sme_for_fil:
                 str_write = str_write + str(sme_) + ','
               # print all_sme_for_fil
-              str_write = str_write + defect_status + '\n'
+              str_write = str_write + str(all_sme_cnt) + ',' + defect_status + '\n'
               print '='*50
     str_write   = constants.SMELL_HEADER + '\n' + str_write
     # print str_write

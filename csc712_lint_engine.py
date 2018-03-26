@@ -34,4 +34,5 @@ def runLinter(full_path_file):
     os.remove(constants.TMP_DES_TXT)
     ## returns a tuple of lists : first is implementation, second is line design
     all_smells = impl_smel_for_file + desi_smel_for_file
-    return all_smells
+    all_sme_cnt = sum(all_smells)
+    return all_smells, all_sme_cnt
