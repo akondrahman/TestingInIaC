@@ -4,6 +4,39 @@ Answer to RQ2 for CSC 712 project
 Mar 26, 2018
 '''
 
+def createOutputDirectory(dirParam):
+  if not os.path.exists(dirParam):
+     os.makedirs(dirParam)
+
+def calcSmellDensity(smell_cnt, file_list):
+    val = 0
+    tot_lin = 0
+    for file_path in file_list:
+        file_ = open(file_path, 'rU')
+        num_lines = sum(1 for line_ in file_)
+        tot_lin = tot_lin + num_lines
+    smell_density = float(smell_cnt)/float(tot_lin)
+    val = round(smell_density * 1000, 3) ### density per KLOC
+    return val
+
+def sortDate(mon_lis):
+    months = [datetime.datetime.strptime(m, "%Y-%m") for m in mon_lis]
+    months.sort()
+    sorted_mon = [datetime.datetime.strftime(m_, "%Y-%m") for m_ in months]
+    return sorted_mon
+
+def makePlot(x_par, y_par, head_par, out_dir_par, type_par, ds_par):
+    plt_x_axis = [x_ for x_ in xrange(len(x_par))]
+    plt.xticks(plt_x_axis, x_par)
+    plt.plot(plt_x_axis, y_par)
+    plt.title(head_par)
+    plt.xlabel('MONTH')
+    plt.ylabel(type_par)
+    #plt.show()
+    file2save = out_dir_par + head_par + '_' + type_par + '_' + ds_par + '.png'
+    plt.savefig(file2save)
+    plt.close()
+
 def dumpContentIntoFile(strP, fileP):
     fileToWrite = open( fileP, 'w')
     fileToWrite.write(strP)
@@ -39,7 +72,7 @@ def perfAnal(df_pa, header_pa, output_dir, ds_name):
             per_mon_per_smell_list = mon_df[head_].tolist()
             per_mon_cnt = sum(per_mon_per_smell_list) # we need the total count
 
-            per_mon_fil = mon_df['FILE_NAME'].tolist() # we need all file names, a smell can appear multiple times in a file
+            per_mon_fil = mon_df['FULL_PATH'].tolist() # we need all file names, a smell can appear multiple times in a file
 
             per_mon_fil_cnt = len(np.unique(per_mon_fil)) #  file count
             cnt_per_fil   = round(float(per_mon_cnt)/float(per_mon_fil_cnt), 3)
@@ -69,3 +102,17 @@ def perfAnal(df_pa, header_pa, output_dir, ds_name):
         makePlot(mon_plt_lis, uni_fil_lis, head_, output_dir, 'UNI_FIL_PER', ds_name)
         print '='*50
     makeCSV(csv_list, ds_name, output_dir)
+
+
+
+
+
+if __name__=='__main__':
+   '''
+   pass the needed colun headers
+   '''
+   needed_header = ['MISS_DFLT','INCO_NAME','CPLX_EXPR','DUPL_ENTI',
+                    'MSPL_ATTR','IMPR_ALIG','INVA_PROP','INCO_TASK','DEPE_STMT',
+                    'IMPR_QUOT','LONG_STMT','INCO_COND','UNGU_VARI','MULT_ABST',
+                    'UNNE_ABST','MISS_ABST','IMPE_ABST','INSU_MODU','DEFI_ENCA',
+                    'TOTA']
