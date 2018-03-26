@@ -24,11 +24,12 @@ def getImplSmells(path2file):
 def runLinter(full_path_file):
     #1. get implementation smells
     getImplSmells(full_path_file)
-    #2. get Design Smells
-    desi_smel_for_file = SmellDectector.getSmellsFromFile(full_path_file)
-    # 3. parse output
+    #2. parse output
     impl_smel_for_file = impl_aggr.getImplSmellCount()
+    #3. get Design Smells
+    desi_smel_for_file = SmellDectector.getSmellsFromFile(full_path_file)
     #4. delete temp file
     os.remove(constants.OUTPUT_TMP_LOG)
+    os.remove(constants.TMP_DES_TXT)
     ## returns a tuple of lists : first is implementation, second is line design
     return (impl_smel_for_file, desi_smel_for_file)

@@ -22,6 +22,7 @@ REDIRECT_NEW = '>'
 REDIRECT_APP = '>>'
 OUTPUT_TMP_LOG = 'CODE.SMELL.TEMP.LOG'
 FILE_OPEN_MODE = 'rU'
+TMP_DES_TXT = 'tmp.txt'
 ### month constants
 INV_MON_CON = '0000-00'
 ###

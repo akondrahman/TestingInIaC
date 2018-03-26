@@ -90,6 +90,9 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp):
            path_to_analyze = path_to_analyze.replace('//', '/')
            if (os.path.exists(path_to_analyze)):
               print path_to_analyze
+              all_sme_for_fil = lint_engine.runLinter(path_to_analyze)
+              print all_sme_for_fil
+              print '='*50
 
 
 
