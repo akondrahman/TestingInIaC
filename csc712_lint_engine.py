@@ -32,4 +32,5 @@ def runLinter(full_path_file):
     os.remove(constants.OUTPUT_TMP_LOG)
     os.remove(constants.TMP_DES_TXT)
     ## returns a tuple of lists : first is implementation, second is line design
-    return (impl_smel_for_file, desi_smel_for_file)
+    all_smells = impl_smel_for_file + desi_smel_for_file
+    return all_smells

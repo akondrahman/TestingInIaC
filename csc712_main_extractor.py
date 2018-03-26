@@ -16,6 +16,12 @@ def giveTimeStamp():
   strToret = datetime.datetime.fromtimestamp(tsObj).strftime('%Y-%m-%d %H:%M:%S')
   return strToret
 
+def dumpContentIntoFile(strP, fileP):
+    fileToWrite = open( fileP, 'w')
+    fileToWrite.write(strP)
+    fileToWrite.close()
+    return str(os.stat(fileP).st_size)
+
 
 def checkValidity(file_path):
     # skip files that are in hidden directories, and in spec folders
@@ -63,14 +69,18 @@ def getMonthFromCategData(mon_str):
         mon_ = '20' + mon_str.split('/')[-1] + '-' + only_mon
     return mon_
 
-def getPuppetFileDetails(theCompleteCategFile, root_dirp):
-    mon_lis = []
+def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
+    str_write=''
     with open(theCompleteCategFile, constants.FILE_OPEN_MODE) as file_:
       reader_ = csv.reader(file_)
       next(reader_, None)
       for row_ in reader_:
         repo_of_file       = row_[1]
         categ_of_file      = row_[3]
+        if categ_of_file=='N':
+            defect_status = '0'
+        else:
+            defect_status = '1'
         full_path_of_file  = row_[4]
         time_of_file       = row_[5]
         month_of_file      = getMonthFromCategData(time_of_file)
@@ -90,11 +100,17 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp):
            path_to_analyze = path_to_analyze.replace('//', '/')
            if (os.path.exists(path_to_analyze)):
               print path_to_analyze
+              str_write = str_write + month_of_file + ',' + full_path_of_file + ',' + path_to_analyze + ','
               all_sme_for_fil = lint_engine.runLinter(path_to_analyze)
-              print all_sme_for_fil
+              for sme_ in all_sme_for_fil:
+                str_write = str_write + str(sme_) + ','
+              # print all_sme_for_fil
+              str_write = str_write + defect_status + '\n'
               print '='*50
-
-
+    str_write   = constants.SMELL_HEADER + '\n' + str_write
+    write_bytes = dumpContentIntoFile(str_write, ds_fil_out)
+    print 'Dumped a file of {} bytes'.format(write_bytes)
+    print '*'*100
 
 
 # cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/MOZ.csv'
@@ -103,8 +119,9 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp):
 # cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/OST.csv'
 # root_dir = '/Users/akond/SECU_REPOS/ostk-pupp/'
 
-cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/WIK.csv'
-root_dir = '/Users/akond/SECU_REPOS/wiki-pupp/'
+# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/WIK.csv'
+# root_dir = '/Users/akond/SECU_REPOS/wiki-pupp/'
+out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
 
 if __name__=='__main__':
     t1 = time.time()
@@ -112,7 +129,7 @@ if __name__=='__main__':
     print '*'*100
 
     # getData(ds_dir)
-    getPuppetFileDetails(cat_fil, root_dir)
+    getPuppetFileDetails(cat_fil, root_dir, out_fil)
 
 
     print 'Ended at:', giveTimeStamp()
