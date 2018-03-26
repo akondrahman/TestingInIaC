@@ -55,7 +55,7 @@ def makeCSV(lis_par, nam, dir):
     os_bytes = dumpContentIntoFile(str_, file2save)
     print 'DUMPED CSV FILE OF {} BYTES'.format(os_bytes)
 
-def perfAnal(df_pa, header_pa, output_dir, ds_name):
+def answerRQ2(df_pa, header_pa, output_dir, ds_name):
     createOutputDirectory(output_dir)
     mon_lis = np.unique(df_pa['MONTH'].tolist())
     mon_lis = sortDate(mon_lis)
@@ -116,3 +116,10 @@ if __name__=='__main__':
                     'IMPR_QUOT','LONG_STMT','INCO_COND','UNGU_VARI','MULT_ABST',
                     'UNNE_ABST','MISS_ABST','IMPE_ABST','INSU_MODU','DEFI_ENCA',
                     'TOTA']
+
+   results_file = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ2_RQ3_DAT.csv'
+   results_df   = pd.read_csv(results_file)
+   plot_out_dir = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/plots_moz/'
+   ds_nam = 'MOZILLA'
+
+   answerRQ2(results_df, needed_header, plot_out_dir, ds_nam)

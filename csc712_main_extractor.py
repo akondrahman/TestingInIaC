@@ -117,13 +117,13 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
 
 
 
-cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/MOZ.csv'
-root_dir = '/Users/akond/SECU_REPOS/mozi-pupp/'
-out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ2_RQ3_DAT.csv'
+# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/MOZ.csv'
+# root_dir = '/Users/akond/SECU_REPOS/mozi-pupp/'
+# out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ2_RQ3_DAT.csv'
 
 # cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/OST.csv'
 # root_dir = '/Users/akond/SECU_REPOS/ostk-pupp/'
-# out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/OST_RQ2_RQ3_DAT.csv'
+# out_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/OST_RQ2_RQ3_DAT.csv'
 
 # cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/WIK.csv'
 # root_dir = '/Users/akond/SECU_REPOS/wiki-pupp/'
