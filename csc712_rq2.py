@@ -3,6 +3,11 @@ Akond Rahman
 Answer to RQ2 for CSC 712 project
 Mar 26, 2018
 '''
+import pandas as pd
+import numpy as np
+import datetime
+import matplotlib.pyplot as plt
+import os
 
 def createOutputDirectory(dirParam):
   if not os.path.exists(dirParam):
@@ -72,7 +77,7 @@ def answerRQ2(df_pa, header_pa, output_dir, ds_name):
             per_mon_per_smell_list = mon_df[head_].tolist()
             per_mon_cnt = sum(per_mon_per_smell_list) # we need the total count
 
-            per_mon_fil = mon_df['FULL_PATH'].tolist() # we need all file names, a smell can appear multiple times in a file
+            per_mon_fil = mon_df['MONT_PATH'].tolist() # we need all file names, a smell can appear multiple times in a file
 
             per_mon_fil_cnt = len(np.unique(per_mon_fil)) #  file count
             cnt_per_fil   = round(float(per_mon_cnt)/float(per_mon_fil_cnt), 3)
@@ -82,8 +87,7 @@ def answerRQ2(df_pa, header_pa, output_dir, ds_name):
             extra work for unique file: no of unique scripts for each at least one smell occur
             '''
             file_sme_df = mon_df[mon_df[head_] > 0]
-            all_fil_lis = file_sme_df['FILE_NAME'].tolist()
-            all_fil_lis = [processFileName(x_) for x_ in all_fil_lis]
+            all_fil_lis = file_sme_df['FULL_PATH'].tolist()
             # print all_fil_lis
             uni_fil_cnt = len(np.unique(all_fil_lis))
             uni_fil_per = (float(uni_fil_cnt)/float(per_mon_fil_cnt))*100
@@ -117,9 +121,19 @@ if __name__=='__main__':
                     'UNNE_ABST','MISS_ABST','IMPE_ABST','INSU_MODU','DEFI_ENCA',
                     'TOTA']
 
-   results_file = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ2_RQ3_DAT.csv'
-   results_df   = pd.read_csv(results_file)
-   plot_out_dir = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/plots_moz/'
-   ds_nam = 'MOZILLA'
+   # results_file = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ2_RQ3_DAT.csv'
+   # results_df   = pd.read_csv(results_file)
+   # plot_out_dir = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/plots_moz/'
+   # ds_nam = 'MOZILLA'
+
+   # results_file = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/OST_RQ2_RQ3_DAT.csv'
+   # results_df   = pd.read_csv(results_file)
+   # plot_out_dir = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/plots_ost/'
+   # ds_nam = 'OPENSTACK'
+
+   # results_file = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
+   # results_df   = pd.read_csv(results_file)
+   # plot_out_dir = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/plots_wik/'
+   # ds_nam = 'WIKIMEDIA'
 
    answerRQ2(results_df, needed_header, plot_out_dir, ds_nam)
