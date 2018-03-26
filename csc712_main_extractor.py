@@ -88,13 +88,15 @@ def getPuppetFileDetails(theCompleteCategFile):
     return dict2Ret
 
 
-ds_dir = '/Users/akond/SECU_REPOS/test-pupp/'
+ds_dir   = '/Users/akond/SECU_REPOS/test-pupp/'
+cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/TestingInIaC'
 if __name__=='__main__':
     t1 = time.time()
     print 'Started at:', giveTimeStamp()
     print '*'*100
 
-    getData(ds_dir)
+    # getData(ds_dir)
+
 
     print 'Ended at:', giveTimeStamp()
     print '*'*100
