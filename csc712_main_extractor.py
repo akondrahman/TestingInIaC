@@ -71,6 +71,7 @@ def getMonthFromCategData(mon_str):
 
 def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
     str_write=''
+    counter = 0
     with open(theCompleteCategFile, constants.FILE_OPEN_MODE) as file_:
       reader_ = csv.reader(file_)
       next(reader_, None)
@@ -99,7 +100,9 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
            path_to_analyze = preamble  + sub_path
            path_to_analyze = path_to_analyze.replace('//', '/')
            if (os.path.exists(path_to_analyze)):
-              print path_to_analyze
+              counter += 1
+              print 'Count:{}, file:{}'.format(counter, path_to_analyze)
+              print '-'*50
               str_write = str_write + month_of_file + ',' + full_path_of_file + ',' + path_to_analyze + ','
               all_sme_for_fil = lint_engine.runLinter(path_to_analyze)
               for sme_ in all_sme_for_fil:
@@ -108,6 +111,7 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
               str_write = str_write + defect_status + '\n'
               print '='*50
     str_write   = constants.SMELL_HEADER + '\n' + str_write
+    print str_write
     write_bytes = dumpContentIntoFile(str_write, ds_fil_out)
     print 'Dumped a file of {} bytes'.format(write_bytes)
     print '*'*100
@@ -119,8 +123,8 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
 # cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/OST.csv'
 # root_dir = '/Users/akond/SECU_REPOS/ostk-pupp/'
 
-# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/WIK.csv'
-# root_dir = '/Users/akond/SECU_REPOS/wiki-pupp/'
+cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/WIK.csv'
+root_dir = '/Users/akond/SECU_REPOS/wiki-pupp/'
 out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
 
 if __name__=='__main__':
