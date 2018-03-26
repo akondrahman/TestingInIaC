@@ -8,6 +8,8 @@ import os
 import csc712_lint_engine as lint_engine
 import time
 import datetime
+import csv
+import numpy as np
 
 def giveTimeStamp():
   tsObj = time.time()
@@ -61,9 +63,8 @@ def getMonthFromCategData(mon_str):
         mon_ = '20' + mon_str.split('/')[-1] + '-' + only_mon
     return mon_
 
-def getPuppetFileDetails(theCompleteCategFile):
-    dictOfMonth={}
-    dict2Ret={}
+def getPuppetFileDetails(theCompleteCategFile, root_dirp):
+    mon_lis = []
     with open(theCompleteCategFile, constants.FILE_OPEN_MODE) as file_:
       reader_ = csv.reader(file_)
       next(reader_, None)
@@ -74,28 +75,41 @@ def getPuppetFileDetails(theCompleteCategFile):
         time_of_file       = row_[5]
         month_of_file      = getMonthFromCategData(time_of_file)
         if (month_of_file != constants.INV_MON_CON):
-          if month_of_file not in dictOfAllFiles:
-            dictOfMonth[month_of_file] = [categ_of_file]
-          else:
-            dictOfMonth[month_of_file] = dictOfMonth[month_of_file] + [ categ_of_file ]
-    for k_, v_ in dictOfMonth.items():
-       uniq = np.unique(v_)
-       if ((len(uniq)==1) and (uniq[0]=='N')):
-         dict2Ret[k_] = '0'
-       else:
-         dict2Ret[k_] = '1'
-    print dict2ret
-    return dict2Ret
+           if repo_of_file.endswith('/'):
+              repo2look = repo_of_file.split('/')[-2]
+           else:
+              repo2look = repo_of_file.split('/')[-1]
+           # print repo2look
+           sub_path = full_path_of_file.replace(repo_of_file, '')
+           preamble = root_dir + repo2look + '-' + month_of_file
+           # print preamble
+           # print sub_path
+           if (preamble.endswith('/')==False):
+             preamble = preamble + '/'
+           path_to_analyze = preamble  + sub_path
+           path_to_analyze = path_to_analyze.replace('//', '/')
+           if (os.path.exists(path_to_analyze)):
+              print path_to_analyze
 
 
-ds_dir   = '/Users/akond/SECU_REPOS/test-pupp/'
-cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/TestingInIaC'
+
+
+# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/MOZ.csv'
+# root_dir = '/Users/akond/SECU_REPOS/mozi-pupp/'
+
+# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/OST.csv'
+# root_dir = '/Users/akond/SECU_REPOS/ostk-pupp/'
+
+cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/WIK.csv'
+root_dir = '/Users/akond/SECU_REPOS/wiki-pupp/'
+
 if __name__=='__main__':
     t1 = time.time()
     print 'Started at:', giveTimeStamp()
     print '*'*100
 
     # getData(ds_dir)
+    getPuppetFileDetails(cat_fil, root_dir)
 
 
     print 'Ended at:', giveTimeStamp()

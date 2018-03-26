@@ -24,3 +24,4 @@ OUTPUT_TMP_LOG = 'CODE.SMELL.TEMP.LOG'
 FILE_OPEN_MODE = 'rU'
 ### month constants
 INV_MON_CON = '0000-00'
+###
