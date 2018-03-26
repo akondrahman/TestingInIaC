@@ -102,7 +102,6 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
            if (os.path.exists(path_to_analyze)):
               counter += 1
               print 'Count:{}, file:{}'.format(counter, path_to_analyze)
-              print '-'*50
               str_write = str_write + month_of_file + ',' + full_path_of_file + ',' + path_to_analyze + ','
               all_sme_for_fil = lint_engine.runLinter(path_to_analyze)
               for sme_ in all_sme_for_fil:
@@ -111,21 +110,24 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
               str_write = str_write + defect_status + '\n'
               print '='*50
     str_write   = constants.SMELL_HEADER + '\n' + str_write
-    print str_write
+    # print str_write
     write_bytes = dumpContentIntoFile(str_write, ds_fil_out)
     print 'Dumped a file of {} bytes'.format(write_bytes)
     print '*'*100
 
 
+
 # cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/MOZ.csv'
 # root_dir = '/Users/akond/SECU_REPOS/mozi-pupp/'
+# out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ2_RQ3_DAT.csv'
 
 # cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/OST.csv'
 # root_dir = '/Users/akond/SECU_REPOS/ostk-pupp/'
+# out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/OST_RQ2_RQ3_DAT.csv'
 
-cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/WIK.csv'
-root_dir = '/Users/akond/SECU_REPOS/wiki-pupp/'
-out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
+# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/WIK.csv'
+# root_dir = '/Users/akond/SECU_REPOS/wiki-pupp/'
+# out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
 
 if __name__=='__main__':
     t1 = time.time()

@@ -15,7 +15,8 @@ def getImplSmells(path2file):
     if(path2file.endswith(constants.PP_EXT)):
         lintToolCmd = constants.PP_LINT_TOOL
         try:
-           command2exec = lintToolCmd + ' ' + path2file + ' ' + constants.REDIRECT_APP + ' ' + constants.OUTPUT_TMP_LOG
+           # command2exec = lintToolCmd + ' ' + path2file + ' ' + constants.REDIRECT_APP + ' ' + constants.OUTPUT_TMP_LOG
+           command2exec = lintToolCmd + ' ' + path2file + ' ' + constants.REDIRECT_NEW + ' ' + constants.OUTPUT_TMP_LOG
            subprocess.check_output([constants.BASH_CMD, constants.BASH_FLAG, command2exec])
         except subprocess.CalledProcessError as e_:
            print constants.EXCEPTION + str(e_)
