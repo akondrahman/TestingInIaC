@@ -8,23 +8,23 @@ from scipy import stats
 
 def getCorrelation(dataset, smells):
     # print dataset.head()
+    all_sme_list = []
     for smell_ in smell_names:
         all_mon = dataset['MONTH'].tolist()
-        per_sme_list = []
         for mon_ in all_mon:
             mon_dat = dataset[dataset['MONTH']==mon_]
             mon_def = mon_dat['DEFECT'].tolist()
             mon_sme = mon_dat[smell_].tolist()
             mon_cor = stats.spearmanr(mon_def, mon_sme)
-            per_sme_list.append((smell_, mon_, mon_cor[0], mon_cor[1]))
-    df_to_ret = pd.DataFrame(per_sme_list, columns=['SMELL', 'MONTH', 'SPEAR_CORR', 'SPEAR_P'])
+            all_sme_list.append((smell_, mon_, mon_cor[0], mon_cor[1]))
+    df_to_ret = pd.DataFrame(all_sme_list, columns=['SMELL', 'MONTH', 'SPEAR_CORR', 'SPEAR_P'])
     print df_to_ret.head()
     print '='*50
     return df_to_ret
 
 if __name__=='__main__':
    ds_file_name  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
-   out_file_name = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_OUT.csv'
+   out_file_name = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ3_OUT.csv'
 
 
    smell_names = ['MISS_DFLT', 'INCO_NAME',	'CPLX_EXPR', 'DUPL_ENTI', 'MSPL_ATTR', 'IMPR_ALIG',
