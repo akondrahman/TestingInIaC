@@ -5,6 +5,7 @@ Correlating defect count and smell count
 '''
 import pandas as pd
 from scipy import stats
+import numpy as np
 
 def getCorrelation(dataset, smells):
     # print dataset.head()
@@ -19,7 +20,8 @@ def getCorrelation(dataset, smells):
             all_sme_list.append((smell_, mon_, mon_cor[0], mon_cor[1]))
     df_to_ret = pd.DataFrame(all_sme_list, columns=['SMELL', 'MONTH', 'SPEAR_CORR', 'SPEAR_P'])
     df_to_ret = df_to_ret.fillna(0)
-    print df_to_ret.head()
+    df_to_ret = df_to_ret[ (df_to_ret['SPEAR_CORR'] >= 0.0) & (df_to_ret['SPEAR_P'] > 0) ]
+    print df_to_ret.tail()
     print '='*50
     return df_to_ret
 
