@@ -18,6 +18,7 @@ def getCorrelation(dataset, smells):
             mon_cor = stats.spearmanr(mon_def, mon_sme)
             all_sme_list.append((smell_, mon_, mon_cor[0], mon_cor[1]))
     df_to_ret = pd.DataFrame(all_sme_list, columns=['SMELL', 'MONTH', 'SPEAR_CORR', 'SPEAR_P'])
+    df_to_ret = df_to_ret.fillna(0)
     print df_to_ret.head()
     print '='*50
     return df_to_ret
