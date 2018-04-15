@@ -20,12 +20,17 @@ def getCorrelation(dataset, smells):
     df_to_ret = pd.DataFrame(per_sme_list, columns=['SMELL', 'MONTH', 'SPEAR_CORR', 'SPEAR_P'])
     print df_to_ret.head()
     print '='*50
+    return df_to_ret
 
 if __name__=='__main__':
-   ds_file_name = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
+   ds_file_name  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
+   out_file_name = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_OUT.csv'
+
+
    smell_names = ['MISS_DFLT', 'INCO_NAME',	'CPLX_EXPR', 'DUPL_ENTI', 'MSPL_ATTR', 'IMPR_ALIG',
                   'INVA_PROP',	'INCO_TASK', 'DEPE_STMT', 'IMPR_QUOT', 'LONG_STMT', 'INCO_COND',
                   'UNGU_VARI',	'MULT_ABST', 'UNNE_ABST', 'MISS_ABST', 'IMPE_ABST',	'INSU_MODU',
                   'DEFI_ENCA',	'TOTA']
    ds_ = pd.read_csv(ds_file_name)
-   getCorrelation(ds_, smell_names)
+   the_df = getCorrelation(ds_, smell_names)
+   the_df.to_csv(out_file_name)
