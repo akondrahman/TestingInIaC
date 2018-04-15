@@ -16,15 +16,15 @@ def getCorrelation(dataset, smells):
             mon_def = mon_dat['DEFECT'].tolist()
             mon_sme = mon_dat[smell_].tolist()
             mon_cor = stats.spearmanr(mon_def, mon_sme)
-            per_sme_list.append((smell_, mon_, mon_cor))
-    df_to_ret = pd.DataFrame(per_sme_list, columns=['SMELL', 'MONTH', 'SPEARMAN'])
+            per_sme_list.append((smell_, mon_, mon_cor[0], mon_cor[1]))
+    df_to_ret = pd.DataFrame(per_sme_list, columns=['SMELL', 'MONTH', 'SPEAR_CORR', 'SPEAR_P'])
     print df_to_ret.head()
     print '='*50
 
 if __name__=='__main__':
    ds_file_name = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
    smell_names = ['MISS_DFLT', 'INCO_NAME',	'CPLX_EXPR', 'DUPL_ENTI', 'MSPL_ATTR', 'IMPR_ALIG',
-                  'INVA_PROP',	'INCO_TASK', 'DEPE_STMT', 'IMPR_QUOT' 'LONG_STMT', 'INCO_COND',
+                  'INVA_PROP',	'INCO_TASK', 'DEPE_STMT', 'IMPR_QUOT', 'LONG_STMT', 'INCO_COND',
                   'UNGU_VARI',	'MULT_ABST', 'UNNE_ABST', 'MISS_ABST', 'IMPE_ABST',	'INSU_MODU',
                   'DEFI_ENCA',	'TOTA']
    ds_ = pd.read_csv(ds_file_name)
