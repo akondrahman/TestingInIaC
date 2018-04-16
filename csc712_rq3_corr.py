@@ -9,6 +9,7 @@ import numpy as np
 import os
 import cliffsDelta
 import matplotlib.pyplot as plt
+import constants
 
 def getCorrelation(dataset, smells):
     # print dataset.head()
