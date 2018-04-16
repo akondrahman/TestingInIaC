@@ -9,7 +9,7 @@ import numpy as np
 import os
 import cliffsDelta
 import matplotlib.pyplot as plt
-import constants
+
 
 def getCorrelation(dataset, smells):
     # print dataset.head()
@@ -66,7 +66,7 @@ def compareTwoGroups(h_group, l_group, feature_name, output_dir_param):
    try:
       TS, p = stats.mannwhitneyu(h_group, l_group, alternative='greater')
    except ValueError as e_:
-      print constants.EXCEPTION + str(e_)
+      print str(e_)
 
    cliffs_delta = cliffsDelta.cliffsDelta(h_group, l_group)
    print 'Smell:{}, TS:{}, P:{}, Cliffs:{}'.format(feature_name, TS, p, cliffs_delta)
