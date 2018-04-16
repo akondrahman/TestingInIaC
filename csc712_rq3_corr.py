@@ -24,8 +24,8 @@ def getCorrelation(dataset, smells):
     df_to_ret = pd.DataFrame(all_sme_list, columns=['SMELL', 'MONTH', 'SPEAR_CORR', 'SPEAR_P'])
     df_to_ret = df_to_ret.fillna(0)
     df_to_ret = df_to_ret[ (df_to_ret['SPEAR_CORR'] >= 0.0) & (df_to_ret['SPEAR_P'] < 0.05) ]
-    print df_to_ret.tail()
-    print '='*50
+    # print df_to_ret.tail()
+    # print '='*50
     return df_to_ret
 
 def makeBoxPlots(h_, l_, feature_param, output_dir_param):
@@ -44,6 +44,7 @@ def compareTwoGroups(h_group, l_group, feature_name, output_dir_param):
    '''
    summary time
    '''
+   print '='*50
    print '(DEFECTIVE:{}): (count:{}, median:{}, mean:{})'.format(feature_name,  len(h_group), np.median(h_group), np.mean(h_group))
    percentiles = [10, 20, 30, 40, 50, 60, 70, 80, 90]
    after_str = ''
@@ -61,11 +62,16 @@ def compareTwoGroups(h_group, l_group, feature_name, output_dir_param):
    print '-'*25
    print before_str
    print '-'*25
-   TS, p = stats.mannwhitneyu(h_group, l_group, alternative='greater')
+   try:
+      TS, p = stats.mannwhitneyu(h_group, l_group, alternative='greater')
+   except ValueError as e_:
+      print constants.EXCEPTION + str(e_)
+
    cliffs_delta = cliffsDelta.cliffsDelta(h_group, l_group)
    print 'Smell:{}, TS:{}, P:{}, Cliffs:{}'.format(feature_name, TS, p, cliffs_delta)
    print '-'*25
    makeBoxPlots(h_group, l_group, feature_name, output_dir_param)
+   print '='*50
 
 def getComparison(datset, smells, outdir):
     if not os.path.exists(outdir):
