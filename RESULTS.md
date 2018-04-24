@@ -2,11 +2,11 @@
 ## Answer to RQ2
 ### The following figure presents the anti-pattern density for all anti-patterns, for all three datasets
 
-![ap-den-moz](https://github.com/adam-p/markdown-here/raw/master/src/common/images/den-moz.png "Anti-pattern Density for Mozilla")
+![ap-den-moz](https://github.com/akondrahman/TestingInIaC/blob/master/images/AP_DEN_MOZ.png "Anti-pattern Density for Mozilla")
 
-![ap-den-ost](https://github.com/adam-p/markdown-here/raw/master/src/common/images/den-ost.png "Anti-pattern Density for Openstack")
+![ap-den-ost](https://github.com/akondrahman/TestingInIaC/blob/master/images/AP_DEN_OST.png "Anti-pattern Density for Openstack")
 
-![ap-den-wik](https://github.com/adam-p/markdown-here/raw/master/src/common/images/den-ost.png "Anti-pattern Density for Wikimedia")
+![ap-den-wik](https://github.com/akondrahman/TestingInIaC/blob/master/images/AP_DEN_MOZ.png "Anti-pattern Density for Wikimedia")
 
 > As stated in the report, we observe *Improper alignment* and *Improper quote usage* to be the dominant anti-patterns 
 
