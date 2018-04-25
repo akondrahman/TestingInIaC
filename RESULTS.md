@@ -21,3 +21,13 @@
 
 > Similar to our findings related to anti-pattern density, we observe *Improper alignment* and *Improper quote usage* to be the dominant anti-patterns 
 
+
+## Answer to RQ3
+### The following figure presents the correlation between anti-pattern count and defect count for all anti-patterns, for all three datasets
+
+![ap-spear-moz](https://github.com/akondrahman/TestingInIaC/blob/master/images/SPEAR_MOZ.png "Correlation Between Defects and Anti-patterns for Mozilla")
+
+![ap-spear-ost](https://github.com/akondrahman/TestingInIaC/blob/master/images/SPEAR_OST.png "Correlation Between Defects and Anti-patterns for Openstack")
+
+![ap-spear-wik](https://github.com/akondrahman/TestingInIaC/blob/master/images/SPEAR_WIK.png "Correlation Between Defects and Anti-patterns for Wikimedia")
+
