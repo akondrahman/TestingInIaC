@@ -115,7 +115,37 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
     print 'Dumped a file of {} bytes'.format(write_bytes)
     print '*'*100
 
-
+def getSharmaMetrics(categFile, dataset_fil_out):
+    temp_file_holder = [] ## to keep track of previosuly visited files
+    str_write=''
+    counter = 0
+    with open(categFile, constants.FILE_OPEN_MODE) as file_:
+      reader_ = csv.reader(file_)
+      next(reader_, None)
+      for row_ in reader_:
+        repo_of_file       = row_[1]
+        categ_of_file      = row_[3]
+        if categ_of_file=='N':
+            defect_status = '0'
+        else:
+            defect_status = '1'
+        full_path_of_file  = row_[4]
+        if (os.path.exists(full_path_of_file)) and (full_path_of_file not in temp_file_holder):
+              counter += 1
+              temp_file_holder.append(full_path_of_file)
+              print 'Count:{}, file:{}'.format(counter, full_path_of_file)
+              str_write = str_write + full_path_of_file + ','
+              all_sme_for_fil, all_sme_cnt = lint_engine.runLinter(full_path_of_file)
+              for sme_ in all_sme_for_fil:
+                str_write = str_write + str(sme_) + ','
+              # print all_sme_for_fil
+              str_write = str_write + str(all_sme_cnt) + ',' + defect_status + '\n'
+              print '='*50
+    str_write   = constants.SHARMA_HEADER + '\n' + str_write
+    # print str_write
+    write_bytes = dumpContentIntoFile(str_write, dataset_fil_out)
+    print 'Dumped a file of {} bytes'.format(write_bytes)
+    print '*'*100
 
 # cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/MOZ.csv'
 # root_dir = '/Users/akond/SECU_REPOS/mozi-pupp/'
@@ -129,13 +159,33 @@ def getPuppetFileDetails(theCompleteCategFile, root_dirp, ds_fil_out):
 # root_dir = '/Users/akond/SECU_REPOS/wiki-pupp/'
 # out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_RQ2_RQ3_DAT.csv'
 
+'''
+For Process Metrics Paper
+'''
+# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/MIR.csv'
+# out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MIR_SHARMA_DATASET.csv'
+
+# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/MOZ.csv'
+# out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_SHARMA_DATASET.csv'
+
+# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/OST.csv'
+# out_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/OST_SHARMA_DATASET.csv'
+
+# cat_fil  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/project-materials/rq_dataset/WIK.csv'
+# out_fil    = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/WIK_SHARMA_DATASET.csv'
+
 if __name__=='__main__':
     t1 = time.time()
     print 'Started at:', giveTimeStamp()
     print '*'*100
 
     # getData(ds_dir)
-    getPuppetFileDetails(cat_fil, root_dir, out_fil)
+    # getPuppetFileDetails(cat_fil, root_dir, out_fil)
+
+    '''
+    For Process Metrics Paper
+    '''
+    getSharmaMetrics(cat_fil, out_fil)
 
 
     print 'Ended at:', giveTimeStamp()

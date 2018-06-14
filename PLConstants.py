@@ -64,3 +64,21 @@ RULE13_1 = "variable not enclosed in {}"
 # REPO_ROOT = "/Users/user/Desktop/puppetAnalysis"
 # AGGREGATOR_FILE = "PuppetLintAggregatedOutput.csv"
 # PUPPETLINT_OUT_FILE = "puppet-lint.log"
+
+'''
+Van Der Bent
+'''
+VDB1  = "quoted boolean value found"
+VDB2  = "string containing only a variable"
+VDB3  = "variable not enclosed in"
+VDB4  = "ensure found on line but it's not the first attribute"
+VDB5  = "mode should be represented as a 4 digit octal value or symbolic mode"
+VDB6  = "unquoted resource title"
+VDB7  = "case statement without a default case"
+VDB8  = "selector inside resource block"
+VDB9  = "not in autoload module layout"
+VDB10 = "class defined inside a class"
+VDB11 = "class inherits across namespaces"
+VDB12 = "right-to-left"
+VDB13 = "top-scope variable being used without an explicit namespace"
+VDB14 = "not documented"

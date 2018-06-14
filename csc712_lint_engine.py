@@ -36,3 +36,8 @@ def runLinter(full_path_file):
     all_smells = impl_smel_for_file + desi_smel_for_file
     all_sme_cnt = sum(all_smells)
     return all_smells, all_sme_cnt
+
+def getLintMetrics(full_path_file):
+    getImplSmells(full_path_file)  ### generate the temp log 
+    warning_for_file = impl_aggr.getVanDerBentWarningCount()
+    return warning_for_file

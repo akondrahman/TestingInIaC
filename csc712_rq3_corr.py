@@ -65,12 +65,11 @@ def compareTwoGroups(h_group, l_group, feature_name, output_dir_param):
    print '-'*25
    try:
       TS, p = stats.mannwhitneyu(h_group, l_group, alternative='greater')
+      cliffs_delta = cliffsDelta.cliffsDelta(h_group, l_group)
+      print 'Smell:{}, TS:{}, P:{}, Cliffs:{}'.format(feature_name, TS, p, cliffs_delta)
+      print '-'*25
    except ValueError as e_:
       print str(e_)
-
-   cliffs_delta = cliffsDelta.cliffsDelta(h_group, l_group)
-   print 'Smell:{}, TS:{}, P:{}, Cliffs:{}'.format(feature_name, TS, p, cliffs_delta)
-   print '-'*25
    makeBoxPlots(h_group, l_group, feature_name, output_dir_param)
    print '='*50
 
@@ -83,9 +82,9 @@ def getComparison(datset, smells, outdir):
         compareTwoGroups(sme_def, sme_non_def, smell_, outdir)
 
 if __name__=='__main__':
-   ds_file_name  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ2_RQ3_DAT.csv'
-   out_file_name = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ3_OUT.csv'
-   stat_compa_dir = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/rq3_stat_compa_moz/'
+   # ds_file_name  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ2_RQ3_DAT.csv'
+   # out_file_name = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/MOZ_RQ3_OUT.csv'
+   # stat_compa_dir = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/rq3_stat_compa_moz/'
 
    # ds_file_name  = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/OST_RQ2_RQ3_DAT.csv'
    # out_file_name = '/Users/akond/Documents/AkondOneDrive/OneDrive/CSC712/output/OST_RQ3_OUT.csv'
